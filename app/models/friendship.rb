@@ -10,7 +10,7 @@ class Friendship < ApplicationRecord
         ->(user, friend) { where("( user_id = #{user.id} AND friend_id = #{friend.id}) OR ( user_id = #{friend.id} AND friend_id = #{user.id})") }
 
   before_create :check_friendship
-  after_create :make_duplicate 
+  after_create :make_duplicate
 
   def check_friendship
     if Friendship.friendship_exists(User.find(user_id), User.find(friend_id)).to_a.any?
@@ -19,7 +19,7 @@ class Friendship < ApplicationRecord
     true
   end
 
-   def make_duplicate
+  def make_duplicate
     Friendship.find_or_create_by(user_id: friend_id, friend_id: user_id, requester_id: friend_id)
   end
 end

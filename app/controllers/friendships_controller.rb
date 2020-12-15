@@ -17,7 +17,7 @@ class FriendshipsController < ApplicationController
 
   def update
     @friendship = Friendship.find_by(requester_id: params[:requester_id])
-    @inverse_friendship=Friendship.find_by(friend_id: params[:friend_id])
+    @inverse_friendship = Friendship.find_by(friend_id: params[:friend_id])
     @friendship.confirmed = true
     @friendship.save
     @inverse_friendship.confirmed = true
