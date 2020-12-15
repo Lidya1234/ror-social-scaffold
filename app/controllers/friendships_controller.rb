@@ -17,8 +17,11 @@ class FriendshipsController < ApplicationController
 
   def update
     @friendship = Friendship.find_by(requester_id: params[:requester_id])
+    @inverse_friendship=Friendship.find_by(friend_id: params[:friend_id])
     @friendship.confirmed = true
     @friendship.save
+    @inverse_friendship.confirmed = true
+    @inverse_friendship.save
 
     redirect_to users_path, notice: 'Friend request was successfully confirmed.'
   end

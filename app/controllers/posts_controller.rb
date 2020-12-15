@@ -16,12 +16,13 @@ class PostsController < ApplicationController
       render :index, alert: 'Post was not created.'
     end
   end
+ 
 
   private
 
   def timeline_posts
-    @timeline_posts ||= current_user.friends_posts.includes(:user)
-    @my_posts = current_user.posts.includes(:user)
+    @timeline_posts = Post.where("user_id IN (?)", current_user.friends)
+
   end
 
   def post_params
