@@ -41,14 +41,4 @@ class User < ApplicationRecord
   def requester?(user)
     id == Friendship.inverse_friendships(self, user).first.requester_id
   end
-
-  def confirm(user)
-    friendship= friendships.find{|friendship| friendship.friend == user}
-    inverse_friendship= inverse_friendships.find{|inverse_friendship| inverse_friendship.user == friend}
-    friendship.confirmed='true'
-    inverse_friendship.confirmed='true'
-    friendship.save
-    inverse_friendship.save
-
-  end
 end

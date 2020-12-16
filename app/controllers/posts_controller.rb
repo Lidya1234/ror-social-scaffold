@@ -21,6 +21,7 @@ class PostsController < ApplicationController
 
   def timeline_posts
     @timeline_posts = Post.where('user_id IN (?)', current_user.friends)
+    @my_posts = current_user.posts.includes(:user)
   end
 
   def post_params
