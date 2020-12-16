@@ -20,7 +20,7 @@ class Friendship < ApplicationRecord
   end
 
   def make_duplicate
-    Friendship.find_or_create_by(user_id: friend_id, friend_id: user_id, requester_id: friend_id)
+    Friendship.find_or_create_by(user_id: friend_id, friend_id: user_id, requester_id: user_id)
   end
 end
 # rubocop: enable Layout/LineLength
