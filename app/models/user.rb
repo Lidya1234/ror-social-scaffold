@@ -45,8 +45,8 @@ class User < ApplicationRecord
   def confirm(user)
     friendship= friendships.find{|friendship| friendship.friend == user}
     inverse_friendship= inverse_friendships.find{|inverse_friendship| inverse_friendship.user == friend}
-    friendship.confirm='true'
-    inverse_friendship.confirm='true'
+    friendship.confirmed='true'
+    inverse_friendship.confirmed='true'
     friendship.save
     inverse_friendship.save
 
