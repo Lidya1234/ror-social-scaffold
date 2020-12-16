@@ -10,7 +10,6 @@ class Friendship < ApplicationRecord
         ->(user, friend) { where("( user_id = #{user.id} AND friend_id = #{friend.id}) OR ( user_id = #{friend.id} AND friend_id = #{user.id})") }
 
   before_create :check_friendship
- 
 
   def check_friendship
     if Friendship.friendship_exists(User.find(user_id), User.find(friend_id)).to_a.any?
@@ -18,7 +17,5 @@ class Friendship < ApplicationRecord
     end
     true
   end
-
-
 end
 # rubocop: enable Layout/LineLength
