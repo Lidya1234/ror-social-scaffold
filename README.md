@@ -11,7 +11,6 @@
 ## Live Demo
 
 [live version](https://stayintouch1.herokuapp.com/users/sign_in)
-TBA
 
 ## Getting Started
 
