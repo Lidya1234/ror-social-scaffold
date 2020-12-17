@@ -10,17 +10,12 @@ class Friendship < ApplicationRecord
         ->(user, friend) { where("( user_id = #{user.id} AND friend_id = #{friend.id}) OR ( user_id = #{friend.id} AND friend_id = #{user.id})") }
 
   before_create :check_friendship
-  # after_create :make_duplicate
 
   def check_friendship
     if Friendship.friendship_exists(User.find(user_id), User.find(friend_id)).to_a.any?
       @error[:friendship] << 'Friendship already exists'
     end
     true
-  end
-
-  def make_duplicate
-    Friendship.create(user_id: friend_id, friend_id: user_id, requester_id: user_id)
   end
 end
 # rubocop: enable Layout/LineLength
