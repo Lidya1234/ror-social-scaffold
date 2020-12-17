@@ -1,14 +1,15 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.0'
+ruby '>= 2.7.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 3.12'
+
+gem 'puma', '~> 5.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -26,8 +27,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-# Install wdm Gem if the platform is Windows
-gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -39,13 +39,29 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'devise'
 
+# For creating env variables
+gem 'figaro'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+
+  # Database cleaner
+  gem 'database_cleaner'
+
+  # Rails console beautifier
+  gem 'hirb'
+end
+
+# Shoulda-matchers for testing
+group :test do
+  gem 'shoulda-matchers', '~> 4.0'
 end
 
 group :test do
-  gem 'rspec'
+  gem 'capybara', '>= 2.15'
+  gem 'rspec-rails'
+  gem 'selenium-webdriver'
 end
 
 group :development do
@@ -60,3 +76,6 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+# Required by rails db:migrate
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
